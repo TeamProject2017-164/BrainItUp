@@ -1,2 +1,0 @@
-# BrainItUp
-Intellectual Game 
