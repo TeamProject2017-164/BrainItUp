@@ -21,7 +21,6 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </GroupBox>
-                <Button Content="Button" Width="108" Height="69" RenderTransformOrigin="0.5,0.5"/>
             </StackPanel>
         </DockPanel>
     </Grid>
