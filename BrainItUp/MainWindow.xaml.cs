@@ -35,8 +35,8 @@ namespace BrainItUp
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Database.Entities = new BrainItUpDatabaseEntities();
-            Pages.RatingPage = new RatingPage();
-            frameMain.Navigate(Pages.RatingPage);
+            Pages.FinishPage = new FinishPage();
+            frameMain.Navigate(Pages.FinishPage);
         }
 
     }

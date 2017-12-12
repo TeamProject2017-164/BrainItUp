@@ -5,23 +5,33 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:BrainItUp"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-      Title="Rating" Loaded="Page_Loaded">
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="Rating" Background="AliceBlue" Loaded="Page_Loaded">
 
     <Grid>
-        <DockPanel LastChildFill="True">
-            <StackPanel DockPanel.Dock="Right">
-                <GroupBox Header="Rating" FontWeight="Bold">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <DockPanel LastChildFill="True" Grid.ColumnSpan="2">
+            <StackPanel DockPanel.Dock="Top">
+                <GroupBox Header="Rating" FontWeight="Bold" FontSize="20" Foreground="PaleVioletRed">
                     <DataGrid x:Name="_dataGridRating" 
                                 IsReadOnly="True"
-                                AutoGenerateColumns="False">
+                                AutoGenerateColumns="False" Foreground="Pink">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="NickName" Binding="{Binding User.NickName}"/>
-                            <DataGridTextColumn Header="Ratio" Binding="{Binding Rate}"/>
+                            <DataGridTextColumn Header="NickName" Foreground="Pink" Binding="{Binding User.NickName}"/>
+                            <DataGridTextColumn Header="Ratio" Foreground="Pink" Binding="{Binding Rate}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </GroupBox>
             </StackPanel>
         </DockPanel>
+        <Button Content="Back to Menu" FontSize="30"  HorizontalAlignment="Center" VerticalAlignment="Top" Width="309" Margin="37,10,54,0" Grid.Row="1" Height="80"/>
+        <Button Content="Start Again" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Width="310" Margin="58,10,32,0" Grid.Row="1" Height="80" Grid.Column="1"/>
     </Grid>
 </Page>
