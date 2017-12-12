@@ -3,7 +3,32 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:BrainItUp"
              StartupUri="MainWindow.xaml">
-    <Application.Resources>
-         
+    <Application.Resources>       
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" ClipToBounds="True">
+                            <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RadiusX="50" RadiusY="50" Fill="Pink"></Rectangle>
+                            <DockPanel Name="ContentPresenterDockPanel">
+                                <ContentPresenter x:Name="ContentPresenter" Margin="20" HorizontalAlignment="Center" Content="{TemplateBinding  Content}" TextBlock.Foreground="White" />
+                            </DockPanel>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Grid Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" ClipToBounds="True">
+                            <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RadiusX="20" RadiusY="20" Fill="MistyRose"></Rectangle>
+                            
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 </Application>
