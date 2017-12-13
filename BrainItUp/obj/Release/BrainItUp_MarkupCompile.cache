@@ -4,17 +4,21 @@
 winexe
 C#
 .cs
-C:\Users\Лейсан\Source\Repos\BrainItUp\BrainItUp\obj\Release\
+
+C:\Users\Lenovo\Source\Repos\BrainItUp\BrainItUp\obj\Release\
+
 BrainItUp
 none
 false
 TRACE
-C:\Users\Лейсан\Source\Repos\BrainItUp\BrainItUp\App.xaml
-21336168729
 
-81987706058
-15-478940265
-MainWindow.xaml;RatingPage.xaml;
+C:\Users\Lenovo\Source\Repos\BrainItUp\BrainItUp\App.xaml
+5-1712941882
+
+11200776822
+17-965456443
+FinishPage.xaml;GamePage.xaml;MainWindow.xaml;RatingPage.xaml;StartPage.xaml;
+
 
 True
 
