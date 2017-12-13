@@ -8,3 +8,4 @@
 /packages
 /Database/Database.sqlproj.user
 *.dbmdl
+*.cache
