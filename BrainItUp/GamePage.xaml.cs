@@ -23,6 +23,8 @@ namespace BrainItUp
         public GamePage()
         {
             InitializeComponent();
+            //здесь надо будет загрузить рандомный вопрос из БД!!!
+            //а также варианты ответов
         }
     }
 }

@@ -24,5 +24,23 @@ namespace BrainItUp
         {
             InitializeComponent();
         }
+
+        private void StartButton_Click(object sender, RoutedEventArgs e)
+        {
+            Pages.GamePage = new GamePage();
+            NavigationService.Navigate(Pages.GamePage);
+        }
+
+        private void RaitingButton_Click(object sender, RoutedEventArgs e)
+        {
+            Pages.RatingPage = new RatingPage();
+            NavigationService.Navigate(Pages.RatingPage);
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            //здесь мы добавляем имя юзера в таблицу и кол-во его баллов
+            MessageBox.Show("Your resuts are saved successfully","",MessageBoxButton.OK);
+        }
     }
 }
