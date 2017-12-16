@@ -15,6 +15,14 @@ namespace BrainItUp
             get { return _value; }
             set { _value = value; }
         }
+        private int rightAnswers=0;
+
+        public int RightAnswers
+        {
+            get { return rightAnswers; }
+            set { rightAnswers =value; }
+        }
+
 
     }
 }
