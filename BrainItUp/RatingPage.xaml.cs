@@ -38,5 +38,18 @@ namespace BrainItUp
             catch { MessageBox.Show("Something goes wrong", "Error", MessageBoxButton.OK); }
         }
 
+        private void StartButton_Click(object sender, RoutedEventArgs e)
+        {
+            Counter counter = new Counter();
+            counter.Value = 0;
+            Pages.GamePage = new GamePage(counter);
+            NavigationService.Navigate(Pages.GamePage);
+        }
+
+        private void GoBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            Pages.StartPage = new StartPage();
+            NavigationService.Navigate(Pages.StartPage);
+        }
     }
 }

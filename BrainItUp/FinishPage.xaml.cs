@@ -20,7 +20,8 @@ namespace BrainItUp
     /// </summary>
     public partial class FinishPage : Page
     {
-        public FinishPage()
+        Counter counter;
+        public FinishPage(Counter c)
         {
             InitializeComponent();
         }
@@ -41,8 +42,14 @@ namespace BrainItUp
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            //здесь мы добавляем имя юзера в таблицу и кол-во его баллов
-            MessageBox.Show("Your resuts are saved successfully","",MessageBoxButton.OK);
+            
+            try
+            {
+                //здесь мы добавляем имя юзера в таблицу и кол-во его баллов, то есть в БД саму
+                //кол-во баллов хранится в поле counter.RightAnswers
+                MessageBox.Show("Your resuts are saved successfully", "", MessageBoxButton.OK);
+            }
+            catch { MessageBox.Show("Somthing is going wrong:(","Error", MessageBoxButton.OK,MessageBoxImage.Error); }
         }
     }
 }
