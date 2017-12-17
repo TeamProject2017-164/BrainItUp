@@ -50,7 +50,8 @@ namespace BrainItUp
                 //здесь мы добавляем имя юзера в таблицу и кол-во его баллов, то есть в БД саму
                 Database.Entities.SaveChanges();
 
-                SaveButton.IsEnabled = false;
+                Pages.RatingPage = new RatingPage();
+                NavigationService.Navigate(Pages.RatingPage);
             }
             catch (Exception ex)
             {

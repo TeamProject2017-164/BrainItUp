@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using DatabaseModels.Extensions;
 
 namespace BrainItUp
 {
@@ -118,30 +119,24 @@ namespace BrainItUp
             //таким образом все ответы выводятся в случайном порядке
             var answersArray = question.Answers.ToArray();
 
-            Random rnd = new Random();
-            var randomAnswers = answersArray.ToArray();
+            var randomAnswers = answersArray.RandomizeCollection().ToArray();
+
+            var buttons = new[] { AnswerButton1, AnswerButton2, AnswerButton3, AnswerButton4 };
+
             _wrongAnswer = null;
 
-            for (var i = 0; i < randomAnswers.Length; i++)
+            for (var i = 0; i < 4; i++)
             {
-                var k = rnd.Next(i, randomAnswers.Length);
-                var temp = randomAnswers[i];
-                randomAnswers[i] = randomAnswers[k];
-                randomAnswers[k] = temp;
+                var randomAnswer = randomAnswers[i];
+                var button = buttons[i];
 
-                if (_wrongAnswer == null && temp.IsCorrect == false)
-                    _wrongAnswer = temp;
+                button.Tag = randomAnswer;
+                button.Content = randomAnswer.Content;
+
+                if (_wrongAnswer == null && randomAnswer.IsCorrect == false)
+                    _wrongAnswer = randomAnswer;
             }
 
-            AnswerButton1.Tag = randomAnswers[0];
-            AnswerButton2.Tag = randomAnswers[1];
-            AnswerButton3.Tag = randomAnswers[2];
-            AnswerButton4.Tag = randomAnswers[3];
-
-            AnswerButton1.Content = randomAnswers[0].Content;
-            AnswerButton2.Content = randomAnswers[1].Content;
-            AnswerButton3.Content = randomAnswers[2].Content;
-            AnswerButton4.Content = randomAnswers[3].Content;
         }
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
@@ -157,15 +152,9 @@ namespace BrainItUp
                 //это случайный индекс вопроса, который будет выводиться пользователю
                 //таким образом все вопросы выводятся в случайном порядке
 
-                _questionsRandomArray = questions.ToArray();
+                var questionsArray = questions.ToArray();
 
-                for (var questionIndex = 0; questionIndex < questions.Count; questionIndex++)
-                {
-                    var k = rnd.Next(questionIndex, _questionsRandomArray.Length);
-                    var temp = _questionsRandomArray[questionIndex];
-                    _questionsRandomArray[questionIndex] = _questionsRandomArray[k];
-                    _questionsRandomArray[k] = temp;
-                }
+                _questionsRandomArray = questionsArray.RandomizeCollection().ToArray();
 
                 LoadNextQuestionData();
             }
