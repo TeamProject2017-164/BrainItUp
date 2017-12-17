@@ -19,13 +19,13 @@
         </Grid.RowDefinitions>
         <DockPanel LastChildFill="True" Grid.ColumnSpan="2">
             <StackPanel DockPanel.Dock="Top">
-                <GroupBox Header="Rating" FontWeight="Bold" FontSize="20" Foreground="AliceBlue">
+                <GroupBox Header="Rating" FontWeight="Bold" FontSize="20" Foreground="PaleVioletRed">
                     <DataGrid x:Name="_dataGridRating" 
                                 IsReadOnly="True"
-                                AutoGenerateColumns="False" Foreground="Blue">
+                                AutoGenerateColumns="False" Foreground="PaleVioletRed">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="NickName" Foreground="Blue" Binding="{Binding User.NickName}"/>
-                            <DataGridTextColumn Header="Ratio" Foreground="Blue" Binding="{Binding Rate}"/>
+                            <DataGridTextColumn Header="NickName" Foreground="PaleVioletRed" Binding="{Binding User.NickName}"/>
+                            <DataGridTextColumn Header="Ratio" Foreground="PaleVioletRed" Binding="{Binding Rate}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </GroupBox>

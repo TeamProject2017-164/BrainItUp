@@ -141,5 +141,10 @@
       <Name>DatabaseModels</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\мозг.png" />
+    <Resource Include="Images\надпись.png" />
+    <Resource Include="Images\эмблема.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -16,7 +16,7 @@ namespace BrainItUp
         {
             InitializeComponent();
             _counter = c;
-            NickNameTextBox.Text = c.User.NickName ?? "[Enter your name]";
+            NickNameTextBox.Text = c.User.NickName ?? " ";
             ResultsTextBox.Text = $"You answered {c.Value} questions and {c.RightAnswers} of them correct!";
         }
 
