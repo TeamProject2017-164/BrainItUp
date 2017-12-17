@@ -16,5 +16,25 @@
         </Grid.RowDefinitions>
         <Button x:Name="StartButton" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="184,44,148,45" Width="468" Height="111" FontSize="50" Click="StartButton_Click">Start!</Button>
         <Button x:Name="RatingButton" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="184,44,148,45" Width="468" Height="111" FontSize="50" Click="RatingButton_Click">Rating</Button>
+        <Image Source="Images/надпись.png" HorizontalAlignment="Left" Height="195" VerticalAlignment="Top" Width="520" Margin="-5,78,0,0" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-15.531"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Source ="Images/мозг.png" HorizontalAlignment="Left" Height="233" VerticalAlignment="Top" Width="335" Margin="455,15,0,0" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="9.715"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
     </Grid>
 </Page>
