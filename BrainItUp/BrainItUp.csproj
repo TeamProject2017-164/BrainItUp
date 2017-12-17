@@ -61,26 +61,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BrainItUpMessageBox.cs" />
-    <Compile Include="Counter.cs" />
-    <Compile Include="Database.cs" />
-    <Compile Include="FinishPage.xaml.cs">
+    <Compile Include="Helpers\BrainItUpMessageBox.cs" />
+    <Compile Include="Helpers\Counter.cs" />
+    <Compile Include="Helpers\Database.cs" />
+    <Compile Include="Pages\FinishPage.xaml.cs">
       <DependentUpon>FinishPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GamePage.xaml.cs">
+    <Compile Include="Pages\GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RatingPage.xaml.cs">
+    <Compile Include="Pages\RatingPage.xaml.cs">
       <DependentUpon>RatingPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StartPage.xaml.cs">
+    <Compile Include="Pages\StartPage.xaml.cs">
       <DependentUpon>StartPage.xaml</DependentUpon>
     </Compile>
-    <Page Include="FinishPage.xaml">
+    <Page Include="Pages\FinishPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GamePage.xaml">
+    <Page Include="Pages\GamePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -96,17 +96,17 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="RatingPage.xaml">
+    <Page Include="Pages\RatingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="StartPage.xaml">
+    <Page Include="Pages\StartPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pages.cs" />
+    <Compile Include="Helpers\Pages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

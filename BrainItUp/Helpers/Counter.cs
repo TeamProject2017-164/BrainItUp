@@ -6,7 +6,7 @@ namespace BrainItUp
     {
         public Counter()
         {
-            _user = new User();
+            _user = new User { NickName = "Noname" };
             _value = 0;
         }
 

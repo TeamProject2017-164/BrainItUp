@@ -20,7 +20,7 @@
         </Grid.RowDefinitions>
         <Button x:Name="RaitingButton" Content="View Rating" HorizontalAlignment="Center" VerticalAlignment="Center" Width="285" Margin="43,10,72,5" Grid.Row="1" Height="85" FontSize="30" Click="RaitingButton_Click"/>
         <Button x:Name="StartButton" Content="Start Again" HorizontalAlignment="Center" VerticalAlignment="Center" Width="285" Margin="72,10,43,5" Grid.Row="1" Height="85" Grid.Column="1" FontSize="30" Click="StartButton_Click"/>
-        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Congratulations!" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="130" Width="606" Margin="117,0,77,0" FontSize="80" Foreground="PaleVioletRed"/>
+        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Congratulations!" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="130" Width="606" Margin="0,0,0,0" FontSize="80" Foreground="PaleVioletRed"/>
         <TextBox x:Name="ResultsTextBox" Background="MistyRose" Foreground="DarkBlue" FontSize="30" HorizontalAlignment="Left" Height="97" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="701" Margin="56,135,0,0" Grid.ColumnSpan="2"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Please enter your name:" FontSize="30" Foreground="PaleVioletRed" VerticalAlignment="Top" Margin="56,265,0,0" Height="47" Width="334"/>
         <TextBox x:Name="NickNameTextBox" Background="MistyRose" Foreground="DarkBlue" FontSize="25" HorizontalAlignment="Left" Height="47" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="325" Grid.Column="1" Margin="32,265,0,0" GotFocus="NickNameTextBox_GotFocus" />
