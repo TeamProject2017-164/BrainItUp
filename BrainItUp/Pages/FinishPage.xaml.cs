@@ -16,7 +16,7 @@ namespace BrainItUp
         {
             InitializeComponent();
             _counter = c;
-            NickNameTextBox.Text = c.User.NickName ?? " ";
+            NickNameTextBox.Text = "";
             ResultsTextBox.Text = $"You answered {c.Value} questions and {c.RightAnswers} of them correct!";
         }
 
@@ -38,7 +38,7 @@ namespace BrainItUp
             try
             {
                 var nickName = NickNameTextBox.Text;
-                Regex nickNameRegex = new Regex(@"^[a-zA-Z][a-zA-Z0-9]{3,11}$");
+                Regex nickNameRegex = new Regex(@"^[a-zA-ZАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя][a-zA-ZАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя0-9]{3,11}$");
 
                 if (nickName == null || !nickNameRegex.IsMatch(nickName))
                 {
