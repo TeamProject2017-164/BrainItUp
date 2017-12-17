@@ -17,7 +17,9 @@ namespace BrainItUp
         private Counter _counter;
         private Question[] _questionsRandomArray;
         private int _currentQuestionIndex;
-        private DispatcherTimer _dispatcherTimer;
+        private DispatcherTimer _finishTimer;
+        private DispatcherTimer _questionTimer;
+        private Answer _wrongAnswer;
 
         public GamePage()
         {
@@ -32,20 +34,25 @@ namespace BrainItUp
             _counter = new Counter();
             _currentQuestionIndex = 0;
 
-            _dispatcherTimer = new DispatcherTimer();
-            _dispatcherTimer.Tick += new EventHandler(DispatcherTimer_Tick);
-            _dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
-            _dispatcherTimer.Start();
+            _finishTimer = new DispatcherTimer();
+            _finishTimer.Tick += new EventHandler(FinishTimer_Tick);
+            _finishTimer.Interval = new TimeSpan(0, 1, 0);
+            _finishTimer.Start();
 
+            _questionTimer = new DispatcherTimer();
+            _questionTimer.Tick += new EventHandler(QuestionTimer_Tick);
+            _questionTimer.Interval = new TimeSpan(0, 0, 10);
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
+            _questionTimer.Stop();
+
             var buttonClicked = (Button)sender;
 
             if (buttonClicked == null)
                 return;
-
+            
             var answer = (Answer)buttonClicked.Tag;
 
             if (answer == null)
@@ -56,29 +63,44 @@ namespace BrainItUp
             if (answer.IsCorrect)
                 _counter.RightAnswers++; //но только если ответ правильный мы это делаем, это надо будет прописать
 
+            // дальше уже просто, для всех случаев, при условии правильности
+
             var ua = new UserAnswer { User = _counter.User, Answer = answer };
 
             Database.Entities.UserAnswers.Add(ua);
 
-            // дальше уже просто, для всех случаев, при условии правильности
             LoadNextQuestionData();
-        }
-
-        private void DispatcherTimer_Tick(object sender, EventArgs e)
-        {
-            ForwardToFinishPage();
         }
 
         private void ForwardToFinishPage()
         {
             _counter.Value = _currentQuestionIndex;
-            _dispatcherTimer.Stop();
+            _finishTimer.Stop();
+            _questionTimer.Stop();
             Pages.FinishPage = new FinishPage(_counter);
             NavigationService.Navigate(Pages.FinishPage);
         }
 
+        private void FinishTimer_Tick(object sender, EventArgs e)
+        {
+            ForwardToFinishPage();
+        }
+
+        private void QuestionTimer_Tick(object sender, EventArgs e)
+        {
+            _questionTimer.Stop();
+
+            var ua = new UserAnswer { User = _counter.User, Answer = _wrongAnswer};
+            Database.Entities.UserAnswers.Add(ua);
+
+            LoadNextQuestionData();
+
+        }
+
         private void LoadNextQuestionData()
         {
+            _questionTimer.Start();
+
             if (_currentQuestionIndex == _questionsRandomArray.Length)
             {
                 ForwardToFinishPage();
@@ -98,12 +120,17 @@ namespace BrainItUp
 
             Random rnd = new Random();
             var randomAnswers = answersArray.ToArray();
+            _wrongAnswer = null;
+
             for (var i = 0; i < randomAnswers.Length; i++)
             {
                 var k = rnd.Next(i, randomAnswers.Length);
                 var temp = randomAnswers[i];
                 randomAnswers[i] = randomAnswers[k];
                 randomAnswers[k] = temp;
+
+                if (_wrongAnswer == null && temp.IsCorrect == false)
+                    _wrongAnswer = temp;
             }
 
             AnswerButton1.Tag = randomAnswers[0];
@@ -115,7 +142,6 @@ namespace BrainItUp
             AnswerButton2.Content = randomAnswers[1].Content;
             AnswerButton3.Content = randomAnswers[2].Content;
             AnswerButton4.Content = randomAnswers[3].Content;
-
         }
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
