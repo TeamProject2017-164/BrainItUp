@@ -28,7 +28,6 @@ namespace BrainItUp
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
             base.OnClosing(e);
-            Database.Entities.SaveChanges();
             Database.Entities.Dispose();
         }
 

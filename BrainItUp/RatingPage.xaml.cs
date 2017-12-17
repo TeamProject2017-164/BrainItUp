@@ -1,20 +1,10 @@
 ﻿using DatabaseModels.Extensions;
-using DatabaseModels.Models;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace BrainItUp
 {
@@ -33,16 +23,17 @@ namespace BrainItUp
             try
             {
                 await Database.Entities.UserAnswers.LoadAsync();
-                _dataGridRating.ItemsSource = Database.Entities.UserAnswers.Local.AsQueryable().GetUserRating();
+                _dataGridRating.ItemsSource = Database.Entities.UserAnswers.Local.AsQueryable().GetUserRating().OrderByDescending(x=> x.Rate);
             }
-            catch { MessageBox.Show("Something goes wrong", "Error", MessageBoxButton.OK); }
+            catch (Exception ex)
+            {
+                BrainItUpMessageBox.Error(ex);
+            }
         }
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            Counter counter = new Counter();
-            counter.Value = 0;
-            Pages.GamePage = new GamePage(counter);
+            Pages.GamePage = new GamePage();
             NavigationService.Navigate(Pages.GamePage);
         }
 

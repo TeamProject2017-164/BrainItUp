@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using DatabaseModels.Models;
+using System;
+using System.Windows.Threading;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace BrainItUp
 {
@@ -20,52 +14,139 @@ namespace BrainItUp
     /// </summary>
     public partial class GamePage : Page
     {
-        public GamePage(Counter c)
+        private Counter _counter;
+        private Question[] _questionsRandomArray;
+        private int _currentQuestionIndex;
+        private DispatcherTimer _dispatcherTimer;
+
+        public GamePage()
         {
             InitializeComponent();
-            counter = c;
-            counter.Value += 1;
-            LoadData();
-            
-            System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-            dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
-            dispatcherTimer.Start();
+
+            QuestionTextBox.Text = "Loading... please wait!";
+            AnswerButton1.Content = "";
+            AnswerButton2.Content = "";
+            AnswerButton3.Content = "";
+            AnswerButton4.Content = "";
+
+            _counter = new Counter();
+            _currentQuestionIndex = 0;
+
+            _dispatcherTimer = new DispatcherTimer();
+            _dispatcherTimer.Tick += new EventHandler(DispatcherTimer_Tick);
+            _dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
+            _dispatcherTimer.Start();
+
         }
-        Counter counter;
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
+            var buttonClicked = (Button)sender;
+
+            if (buttonClicked == null)
+                return;
+
+            var answer = (Answer)buttonClicked.Tag;
+
+            if (answer == null)
+                return;
 
             // тут мы проверяем на ответ на правлильность (информ. про это в БД), если ответ верный (if True), 
             // то мы делаем вот что:
-            counter.RightAnswers += 1; //но только если ответ правильный мы это делаем, это надо будет прописать
+            if (answer.IsCorrect)
+                _counter.RightAnswers++; //но только если ответ правильный мы это делаем, это надо будет прописать
 
-            // дальше уже просто, для всех случаев, не при условии правильности
-            LoadData();
-                
-            
+            var ua = new UserAnswer { User = _counter.User, Answer = answer };
+
+            Database.Entities.UserAnswers.Add(ua);
+
+            // дальше уже просто, для всех случаев, при условии правильности
+            LoadNextQuestionData();
         }
 
-        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
-            Pages.FinishPage = new FinishPage(counter);
+            ForwardToFinishPage();
+        }
+
+        private void ForwardToFinishPage()
+        {
+            _counter.Value = _currentQuestionIndex;
+            _dispatcherTimer.Stop();
+            Pages.FinishPage = new FinishPage(_counter);
             NavigationService.Navigate(Pages.FinishPage);
         }
-        private void LoadData()
+
+        private void LoadNextQuestionData()
         {
-            Random rnd = new Random();
-            int index = rnd.Next(1, 40); //это индекс вопроса, который будет выводиться пользователю 
-                                         //(если индексы,конечно, заданы именно таким образом, то есть с 1, по порядку),
-                                         //тут типа рассчитано, что вопросов всего 39, поэтому до 40,
-                                         //не знаю уж сколько их там на самом деле
+            if (_currentQuestionIndex == _questionsRandomArray.Length)
+            {
+                ForwardToFinishPage();
+                return;
+            }
+
+            var question = _questionsRandomArray[_currentQuestionIndex];
+
+            _currentQuestionIndex++;
 
             //здесь надо будет загрузить рандомный вопрос из БД!!!
-            QuestionTextBox.Text = /*сюда вставляем строку вопроса*/""; //пока строка пустая, потом удалить и заменить на вопрос 
+            QuestionTextBox.Text = question.Content;
+
             //а также варианты ответов 
-            AnswerButton1.Content = "";
-            AnswerButton2.Content = ""; //тут аналогично, просто в кнопки загрузить варианты ответов
-            AnswerButton3.Content = "";
-            AnswerButton4.Content = "";
+            //таким образом все ответы выводятся в случайном порядке
+            var answersArray = question.Answers.ToArray();
+
+            Random rnd = new Random();
+            var randomAnswers = answersArray.ToArray();
+            for (var i = 0; i < randomAnswers.Length; i++)
+            {
+                var k = rnd.Next(i, randomAnswers.Length);
+                var temp = randomAnswers[i];
+                randomAnswers[i] = randomAnswers[k];
+                randomAnswers[k] = temp;
+            }
+
+            AnswerButton1.Tag = randomAnswers[0];
+            AnswerButton2.Tag = randomAnswers[1];
+            AnswerButton3.Tag = randomAnswers[2];
+            AnswerButton4.Tag = randomAnswers[3];
+
+            AnswerButton1.Content = randomAnswers[0].Content;
+            AnswerButton2.Content = randomAnswers[1].Content;
+            AnswerButton3.Content = randomAnswers[2].Content;
+            AnswerButton4.Content = randomAnswers[3].Content;
+
+        }
+
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                await Database.Entities.Questions.LoadAsync();
+
+                var questions = Database.Entities.Questions.Local;
+
+                Random rnd = new Random();
+
+                //это случайный индекс вопроса, который будет выводиться пользователю
+                //таким образом все вопросы выводятся в случайном порядке
+
+                _questionsRandomArray = questions.ToArray();
+
+                for (var questionIndex = 0; questionIndex < questions.Count; questionIndex++)
+                {
+                    var k = rnd.Next(questionIndex, _questionsRandomArray.Length);
+                    var temp = _questionsRandomArray[questionIndex];
+                    _questionsRandomArray[questionIndex] = _questionsRandomArray[k];
+                    _questionsRandomArray[k] = temp;
+                }
+
+                LoadNextQuestionData();
+            }
+            catch (Exception ex)
+            {
+                BrainItUpMessageBox.Error(ex);
+            }
         }
     }
 }

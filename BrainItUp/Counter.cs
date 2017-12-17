@@ -1,26 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DatabaseModels.Models;
 
 namespace BrainItUp
 {
-   public class Counter
+    public class Counter
     {
-        private int _value=0;
+        public Counter()
+        {
+            _user = new User();
+            _value = 0;
+        }
 
+        private int _value;
         public int Value
         {
             get { return _value; }
             set { _value = value; }
         }
-        private int rightAnswers=0;
 
+        private int _rightAnswers;
         public int RightAnswers
         {
-            get { return rightAnswers; }
-            set { rightAnswers =value; }
+            get { return _rightAnswers; }
+            set { _rightAnswers =value; }
+        }
+
+        private User _user;
+        public User User
+        {
+            get { return _user; }
         }
 
 

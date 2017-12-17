@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BrainItUp"
         mc:Ignorable="d"
         Title="Brain It Up"       
-        Height="600" Width="800" MinWidth="800" MinHeight="600" Loaded="Window_Loaded">
+        Height="600" Width="800" MinWidth="800" MinHeight="600" MaxWidth="800" MaxHeight="600" Loaded="Window_Loaded">
     <Grid>
         <Frame Name="frameMain" NavigationUIVisibility="Hidden">
         </Frame>

@@ -29,12 +29,8 @@ namespace BrainItUp
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
-            Counter counter = new Counter();
-            counter.Value = 0;
-            Pages.GamePage = new GamePage(counter);
+            Pages.GamePage = new GamePage();
             NavigationService.Navigate(Pages.GamePage);
-            
-            
         }
 
         private void RatingButton_Click(object sender, RoutedEventArgs e)

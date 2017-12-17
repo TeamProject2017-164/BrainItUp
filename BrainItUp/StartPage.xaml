@@ -15,6 +15,6 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Button x:Name="StartButton" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="184,44,148,45" Width="468" Height="111" FontSize="50" Click="StartButton_Click">Start!</Button>
-        <Button x:Name="RatingButton" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="184,44,148,45" Width="468" Height="111" FontSize="50" Click="RatingButton_Click">Ratings</Button>
+        <Button x:Name="RatingButton" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="184,44,148,45" Width="468" Height="111" FontSize="50" Click="RatingButton_Click">Rating</Button>
     </Grid>
 </Page>
