@@ -81,27 +81,96 @@ namespace BrainItUpTests
         }
 
         [Fact]
-        public void Database_Should_Exists()
+        public void Database_Should_Exist()
         {
             Assert.True(_fixture.BrainItUp.Database.Exists());
         }
 
         [Fact]
-        public void Questions_Should_Exist()
+        public async void Question_Should_Exist()
         {
-            Assert.True(_fixture.BrainItUp.Questions.Any());
+            using (var scope = _fixture.BrainItUp.Database.BeginTransaction())
+            {
+                //Arrange
+                var q1 = new Question { Content = "What?" };
+
+                //Act
+                _fixture.BrainItUp.Questions.Add(q1);
+                await _fixture.BrainItUp.SaveChangesAsync();
+
+                //Assert
+                Assert.True(_fixture.BrainItUp.Questions.Where(x => x.QuestionId == q1.QuestionId).Any());
+
+                scope.Rollback();
+            }
         }
 
         [Fact]
-        public void Answers_Should_Exist()
+        public async void Answer_Should_Exist()
         {
-            Assert.True(_fixture.BrainItUp.Answers.Any());
+            using (var scope = _fixture.BrainItUp.Database.BeginTransaction())
+            {
+                //Arrange
+                var a1 = new Answer { Question = new Question { Content = "What?" }, Content = "That.", IsCorrect = true };
+
+                //Act
+                _fixture.BrainItUp.Answers.Add(a1);
+                await _fixture.BrainItUp.SaveChangesAsync();
+
+                //Assert
+                Assert.True(_fixture.BrainItUp.Answers.Where(x => x.AnswerId == a1.AnswerId).Any());
+
+                scope.Rollback();
+            }
         }
 
         [Fact]
-        public void Users_Should_Exist()
+        public async void UserAnswer_Should_Exist()
         {
-            Assert.True(_fixture.BrainItUp.Users.Any());
+            using (var scope = _fixture.BrainItUp.Database.BeginTransaction())
+            {
+                //Arrange
+                var u = new User { NickName = "Paul" };
+                _fixture.BrainItUp.Users.Add(u);
+
+                var q = new Question { Content = "When?" };
+                _fixture.BrainItUp.Questions.Add(q);
+
+                var a = new Answer { Question = q, Content = "Anytime.", IsCorrect = true };
+                _fixture.BrainItUp.Answers.Add(a);
+
+                await _fixture.BrainItUp.SaveChangesAsync();
+
+                var ua = new UserAnswer { User = u, Answer = a };
+
+                _fixture.BrainItUp.UserAnswers.Add(ua);
+
+                await _fixture.BrainItUp.SaveChangesAsync();
+
+                //Assert
+                Assert.True(_fixture.BrainItUp.UserAnswers.Where(x=>x.UserAnswerId == ua.UserAnswerId).Any());
+
+                scope.Rollback();
+            }
+        }
+
+        [Fact]
+        public async void User_Should_Exist()
+        {
+            using (var scope = _fixture.BrainItUp.Database.BeginTransaction())
+            {
+                //Arrange
+                var u1 = new User { NickName = "Ivan" };
+
+                //Act
+                _fixture.BrainItUp.Users.Add(u1);
+                await _fixture.BrainItUp.SaveChangesAsync();
+
+                //Assert
+                Assert.True(_fixture.BrainItUp.Users.Where(x => x.UserId == u1.UserId).Any());
+
+                scope.Rollback();
+            }
         }
 
     }
