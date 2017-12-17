@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+
 
 namespace BrainItUp
 {
@@ -23,6 +25,22 @@ namespace BrainItUp
         public StartPage()
         {
             InitializeComponent();
+        }
+
+        private void StartButton_Click(object sender, RoutedEventArgs e)
+        {
+            Counter counter = new Counter();
+            counter.Value = 0;
+            Pages.GamePage = new GamePage(counter);
+            NavigationService.Navigate(Pages.GamePage);
+            
+            
+        }
+
+        private void RatingButton_Click(object sender, RoutedEventArgs e)
+        {
+            Pages.RatingPage = new RatingPage();
+            NavigationService.Navigate(Pages.RatingPage);
         }
     }
 }

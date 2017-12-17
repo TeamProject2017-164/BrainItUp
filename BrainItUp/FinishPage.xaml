@@ -18,13 +18,13 @@
             <RowDefinition Height="5*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Button Content="View Ratings" HorizontalAlignment="Center" VerticalAlignment="Center" Width="285" Margin="43,10,72,5" Grid.Row="1" Height="85" FontSize="30"/>
-        <Button Content="Start Again" HorizontalAlignment="Center" VerticalAlignment="Center" Width="285" Margin="72,10,43,5" Grid.Row="1" Height="85" Grid.Column="1" FontSize="30"/>
+        <Button x:Name="RaitingButton" Content="View Ratings" HorizontalAlignment="Center" VerticalAlignment="Center" Width="285" Margin="43,10,72,5" Grid.Row="1" Height="85" FontSize="30" Click="RaitingButton_Click"/>
+        <Button x:Name="StartButton" Content="Start Again" HorizontalAlignment="Center" VerticalAlignment="Center" Width="285" Margin="72,10,43,5" Grid.Row="1" Height="85" Grid.Column="1" FontSize="30" Click="StartButton_Click"/>
         <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Congratulations!" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="130" Width="606" Margin="117,0,77,0" FontSize="80" Foreground="PaleVioletRed"/>
         <TextBox HorizontalAlignment="Left" Height="97" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="701" Margin="56,135,0,0" Grid.ColumnSpan="2"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Please enter your name:" FontSize="30" Foreground="PaleVioletRed" VerticalAlignment="Top" Margin="56,265,0,0" Height="47" Width="334"/>
         <TextBox HorizontalAlignment="Left" Height="47" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="325" Grid.Column="1" Margin="32,265,0,0"/>
-        <Button Content="Save It" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Width="126" Grid.Column="1" Margin="32,333,0,0" Height="63"/>
+        <Button x:Name="SaveButton" Content="Save It" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Width="126" Grid.Column="1" Margin="32,333,0,0" Height="63" Click="SaveButton_Click"/>
 
     </Grid>
 </Page>
