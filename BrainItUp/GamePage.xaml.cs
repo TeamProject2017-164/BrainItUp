@@ -20,14 +20,15 @@ namespace BrainItUp
     /// </summary>
     public partial class GamePage : Page
     {
+        System.Windows.Threading.DispatcherTimer dispatcherTimer;
         public GamePage(Counter c)
         {
             InitializeComponent();
             counter = c;
             counter.Value += 1;
             LoadData();
-            
-            System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+
+            dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
             dispatcherTimer.Start();
@@ -53,7 +54,8 @@ namespace BrainItUp
                 Pages.FinishPage = new FinishPage(counter);
                 NavigationService.Navigate(Pages.FinishPage);
             }
-            catch { }
+            catch { MessageBox.Show("", ""); }
+            dispatcherTimer.Stop();
         }
         private void LoadData()
         {
