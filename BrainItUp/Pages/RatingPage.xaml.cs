@@ -23,7 +23,11 @@ namespace BrainItUp
             try
             {
                 await Database.Entities.UserAnswers.LoadAsync();
-                _dataGridRating.ItemsSource = Database.Entities.UserAnswers.Local.AsQueryable().GetUserRating().OrderByDescending(x=> x.Rate);
+                _dataGridRating.ItemsSource = Database.Entities.
+                    UserAnswers.Local.
+                    AsQueryable().
+                    GetUserRating().
+                    OrderByDescending(x=> x.Rate).Take(10);
             }
             catch (Exception ex)
             {

@@ -19,7 +19,7 @@
         </Grid.RowDefinitions>
         <DockPanel LastChildFill="True" Grid.ColumnSpan="2">
             <StackPanel DockPanel.Dock="Top">
-                <GroupBox Header="Rating" FontWeight="Bold" FontSize="20" Foreground="PaleVioletRed">
+                <GroupBox Header="Rating Top 10" FontWeight="Bold" FontSize="20" Foreground="PaleVioletRed">
                     <DataGrid x:Name="_dataGridRating" 
                                 IsReadOnly="True"
                                 AutoGenerateColumns="False" Foreground="PaleVioletRed">
