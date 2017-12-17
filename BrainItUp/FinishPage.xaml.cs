@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Text.RegularExpressions;
 
 namespace BrainItUp
 {
@@ -20,18 +11,19 @@ namespace BrainItUp
     /// </summary>
     public partial class FinishPage : Page
     {
-        Counter counter;
+        private Counter _counter;
         public FinishPage(Counter c)
         {
             InitializeComponent();
-            counter = c;
+            _counter = c;
+            NickNameTextBox.Text = c.User.NickName ?? "[Enter your name]";
+            ResultsTextBox.Text = $"You answered {c.Value} questions and {c.RightAnswers} of them correct!";
         }
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
             Counter counter = new Counter();
-            counter.Value = 0;
-            Pages.GamePage = new GamePage(counter);
+            Pages.GamePage = new GamePage();
             NavigationService.Navigate(Pages.GamePage);
         }
 
@@ -43,14 +35,32 @@ namespace BrainItUp
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            
             try
             {
+                var nickName = NickNameTextBox.Text;
+                Regex nickNameRegex = new Regex(@"^[a-zA-Z][a-zA-Z0-9]{3,11}$");
+
+                if (nickName == null || !nickNameRegex.IsMatch(nickName))
+                {
+                    BrainItUpMessageBox.Warning("Bad nick name entered, please use letters and numbers.");
+                    return;
+                }
+
+                _counter.User.NickName = nickName;
                 //здесь мы добавляем имя юзера в таблицу и кол-во его баллов, то есть в БД саму
-                //кол-во баллов хранится в поле counter.RightAnswers
-                MessageBox.Show("Your resuts are saved successfully", "", MessageBoxButton.OK);
+                Database.Entities.SaveChanges();
+
+                SaveButton.IsEnabled = false;
             }
-            catch { MessageBox.Show("Somthing is going wrong:(","Error", MessageBoxButton.OK,MessageBoxImage.Error); }
+            catch (Exception ex)
+            {
+                BrainItUpMessageBox.Error(ex);
+            }
+        }
+
+        private void NickNameTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            NickNameTextBox.Text = "";
         }
     }
 }

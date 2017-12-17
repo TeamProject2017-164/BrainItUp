@@ -5,6 +5,8 @@
 .vs
 */bin/Debug
 */obj/Debug
+*/bin/Release
+*/obj/Release
 /packages
 /Database/Database.sqlproj.user
 *.dbmdl
