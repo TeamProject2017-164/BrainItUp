@@ -23,13 +23,13 @@ https://github.com/TeamProject2017-164/BrainItUp/
 * App - приложение
 * MainWindow - основное окно приложения
 * StartPage - стартовая страница приложения с логотипом
-![Start](https://github.com/TeamProject2017-164/BrainItUp/master/ScreenShoots/Start.png)
+![Start](https://github.com/TeamProject2017-164/BrainItUp/blob/master/ScreenShoots/Start.png)
 * RatingPage - страница с рейтингом игроков
-![Rating](https://github.com/TeamProject2017-164/BrainItUp/master/ScreenShoots/Rating.png)
+![Rating](https://github.com/TeamProject2017-164/BrainItUp/blob/master/ScreenShoots/Rating.png)
 * GamePage - основная игровая страница приложения
-![Game](https://github.com/TeamProject2017-164/BrainItUp/master/ScreenShoots/Game.png)
+![Game](https://github.com/TeamProject2017-164/BrainItUp/blob/master/ScreenShoots/Game.png)
 * FinishPage - финальная страница приложения
-![Finish](https://github.com/TeamProject2017-164/BrainItUp/master/ScreenShoots/Finish.png)
+![Finish](https://github.com/TeamProject2017-164/BrainItUp/blob/master/ScreenShoots/Finish.png)
 * BrainItUpMessageBox - класс для вывода однотипных сообщений
 * Counter - счетчик правильных и неправильных ответов пользователя
 * Database - класс для доступа к базе данных с помощью Entity Framework 
@@ -51,15 +51,15 @@ https://github.com/TeamProject2017-164/BrainItUp/
 ## Тестовые сценарии
 
 * Запустите приложение, нажмите кнопку Start! Появляется страница с вопросом и четырьмя ответами. 
-![Start](https://github.com/TeamProject2017-164/BrainItUp/master/ScreenShoots/Start.png)
+![Start](https://github.com/TeamProject2017-164/BrainItUp/blob/master/ScreenShoots/Start.png)
 * Выберите ответ на вопрос и нажмите соответствующий ему ответ. Появится следующий вопрос.
-![Game](https://github.com/TeamProject2017-164/BrainItUp/master/ScreenShoots/Game.png)
+![Game](https://github.com/TeamProject2017-164/BrainItUp/blob/master/ScreenShoots/Game.png)
 * Если не отвечать на вопрос в течение 10 секунд, данный вопрос считается не отвеченным и появится следующий вопрос.
 * По истечении 60 секунд, вы будете переброшены на финишную страницу.
 * На финишной странице можете сохранить свои результаты для рейтинга, начать игру заново, либо посмотреть рейтинг игроков.
-![Finish](https://github.com/TeamProject2017-164/BrainItUp/master/ScreenShoots/Finish.png)
+![Finish](https://github.com/TeamProject2017-164/BrainItUp/blob/master/ScreenShoots/Finish.png)
 * На странице рейтинга отображается рейтинг других игроков
-![Rating](https://github.com/TeamProject2017-164/BrainItUp/master/ScreenShoots/Rating.png)
+![Rating](https://github.com/TeamProject2017-164/BrainItUp/blob/master/ScreenShoots/Rating.png)
 
 ## Тесты
 
