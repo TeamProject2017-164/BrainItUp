@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\UserRating.cs" />
+    <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\UserAnswersExtensions.cs" />
     <Compile Include="Models\Answer.cs">
       <DependentUpon>BrainItUpModel.tt</DependentUpon>

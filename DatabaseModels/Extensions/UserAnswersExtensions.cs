@@ -1,8 +1,6 @@
 ﻿using DatabaseModels.Contracts;
 using DatabaseModels.Models;
 using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace DatabaseModels.Extensions
 {
