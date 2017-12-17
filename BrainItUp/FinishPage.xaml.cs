@@ -24,6 +24,7 @@ namespace BrainItUp
         public FinishPage(Counter c)
         {
             InitializeComponent();
+            counter = c;
         }
 
         private void StartButton_Click(object sender, RoutedEventArgs e)

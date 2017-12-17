@@ -48,8 +48,12 @@ namespace BrainItUp
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-            Pages.FinishPage = new FinishPage(counter);
-            NavigationService.Navigate(Pages.FinishPage);
+            try
+            {
+                Pages.FinishPage = new FinishPage(counter);
+                NavigationService.Navigate(Pages.FinishPage);
+            }
+            catch { }
         }
         private void LoadData()
         {
